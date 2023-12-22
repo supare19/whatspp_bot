@@ -138,22 +138,23 @@ def whatsapp_webhook():
 
         data = request.get_json()
         pprint(data)
-        if data["event"] != "message":
-
+        if data["event"] != "message" and data['event'] != "message.ack":
+            print("hhe-22222222222222222222222")
             return f"Unknown event {data['event']}"
     
         payload = data["payload"]
+        print(str(payload), "shjshhhh")
         # The text
         text = payload["body"]
 
         chat_id = payload["from"]
         message_id = payload['id']
+        chat_id2 = payload['to']
 
         participant = payload.get('participant')
-        print("@@@@@@@" + str(chat_id))
-        if chat_id == "919867530476@c.us":
+        print("@@@@@@@" + str(chat_id) + str(chat_id2))
+        if chat_id2 == "919867530476@c.us":
             send_seen(chat_id=chat_id, message_id=message_id, participant=participant)
-
             #send_message(chat_id=chat_id, text=text)
             # OR reply on the message
             #reply(chat_id=chat_id, message_id=message_id, text=text)
@@ -165,7 +166,7 @@ def whatsapp_webhook():
             # Send OK back
             return "OK"
     except Exception as e:
-        print(str (e))    
+        print(str (e),"ERROR")    
 
 
 
