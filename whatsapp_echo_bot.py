@@ -131,35 +131,41 @@ def sendStopTyping(chatid, msg, session):
 
 @app.route("/bot", methods=["GET", "POST"])
 def whatsapp_webhook():
-    if request.method == "GET":
-        return "WhatsApp Echo Bot is ready!"
+    try:
 
-    data = request.get_json()
-    pprint(data)
-    if data["event"] != "message":
+        if request.method == "GET":
+            return "WhatsApp Echo Bot is ready!"
 
-        return f"Unknown event {data['event']}"
- 
-    payload = data["payload"]
-    # The text
-    text = payload["body"]
+        data = request.get_json()
+        pprint(data)
+        if data["event"] != "message":
 
-    chat_id = payload["from"]
-    message_id = payload['id']
+            return f"Unknown event {data['event']}"
+    
+        payload = data["payload"]
+        # The text
+        text = payload["body"]
 
-    participant = payload.get('participant')
+        chat_id = payload["from"]
+        message_id = payload['id']
 
-    send_seen(chat_id=chat_id, message_id=message_id, participant=participant)
+        participant = payload.get('participant')
+        print("@@@@@@@" + str(chat_id))
+        if chat_id == "919867530476@c.us":
+            send_seen(chat_id=chat_id, message_id=message_id, participant=participant)
 
-    #send_message(chat_id=chat_id, text=text)
-    # OR reply on the message
-    #reply(chat_id=chat_id, message_id=message_id, text=text)
-    ch_id = "120363191397732686@g.us"
-    sendStartTyping(msg=text,chatid=ch_id,session="default")
-    sendStopTyping(msg=text,chatid=ch_id,session="default")
-    sendWhatsappText(msg=text,chatid=ch_id,session="default")
-    # Send OK back
-    return "OK"
+            #send_message(chat_id=chat_id, text=text)
+            # OR reply on the message
+            #reply(chat_id=chat_id, message_id=message_id, text=text)
+            ch_id = "918830182271-1576171664@g.us"
+            ch_id1= "120363191397732686@g.us"
+            sendStartTyping(msg=text,chatid=ch_id,session="default")
+            sendStopTyping(msg=text,chatid=ch_id,session="default")
+            sendWhatsappText(msg=text,chatid=ch_id,session="default")
+            # Send OK back
+            return "OK"
+    except Exception as e:
+        print(str (e))    
 
 
 
