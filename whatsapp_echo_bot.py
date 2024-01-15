@@ -152,13 +152,25 @@ def whatsapp_webhook():
         chat_id2 = payload['to']
 
         participant = payload.get('participant')
-        print("@@@@@@@" + str(chat_id) + str(chat_id2))
         if chat_id2 == "919867530476@c.us":
             send_seen(chat_id=chat_id, message_id=message_id, participant=participant)
             #send_message(chat_id=chat_id, text=text)
             # OR reply on the message
             #reply(chat_id=chat_id, message_id=message_id, text=text)
             ch_id = "918830182271-1576171664@g.us"
+            ch_id2 ="120363220852928966@g.us"
+            ch_id1= "120363191397732686@g.us"
+            sendStartTyping(msg=text,chatid=ch_id,session="default")
+            sendStopTyping(msg=text,chatid=ch_id,session="default")
+            sendWhatsappText(msg=text,chatid=ch_id,session="default")
+            # Send OK back
+            return "OK"
+        elif chat_id2 == '917065275087@c.us':
+            send_seen(chat_id=chat_id, message_id=message_id, participant=participant)
+            #send_message(chat_id=chat_id, text=text)
+            # OR reply on the message
+            #reply(chat_id=chat_id, message_id=message_id, text=text)
+            ch_id ="120363220852928966@g.us"
             ch_id1= "120363191397732686@g.us"
             sendStartTyping(msg=text,chatid=ch_id,session="default")
             sendStopTyping(msg=text,chatid=ch_id,session="default")
@@ -167,6 +179,8 @@ def whatsapp_webhook():
             return "OK"
     except Exception as e:
         print(str (e),"ERROR")    
+
+
 
 
 
