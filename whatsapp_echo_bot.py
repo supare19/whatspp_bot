@@ -132,7 +132,6 @@ def sendStopTyping(chatid, msg, session):
 @app.route("/bot", methods=["GET", "POST"])
 def whatsapp_webhook():
     try:
-
         if request.method == "GET":
             return "WhatsApp Echo Bot is ready!"
 
@@ -175,6 +174,19 @@ def whatsapp_webhook():
             sendStartTyping(msg=text,chatid=ch_id,session="default")
             sendStopTyping(msg=text,chatid=ch_id,session="default")
             sendWhatsappText(msg=text,chatid=ch_id,session="default")
+            # Send OK back
+            return "OK"
+        elif chat_id2 == '918660608101@c.us':
+            send_seen(chat_id=chat_id, message_id=message_id, participant=participant)
+            #send_message(chat_id=chat_id, text=text)
+            # OR reply on the message
+            #reply(chat_id=chat_id, message_id=message_id, text=text)
+            ch_id =" 120363246222931863@g.us"
+            ch_id1= "120363191397732686@g.us"
+            sendStartTyping(msg=text,chatid=ch_id,session="default")
+            sendStopTyping(msg=text,chatid=ch_id,session="default")
+            sendWhatsappText(msg=text,chatid=ch_id,session="default")
+            #jjs
             # Send OK back
             return "OK"
     except Exception as e:
